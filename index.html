@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EXIF Poetics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://releases.transloadit.com/uppy/v3.10.0/uppy.min.css">
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.26.0",
+    "uppy": "https://releases.transloadit.com/uppy/v3.10.0/uppy.min.mjs"
+  }
+}
+</script>
+    <style>
+      /* Custom styles to match the dark theme and Uppy's aesthetic */
+      body {
+        background-color: #111827; /* bg-gray-900 */
+      }
+      .uppy-Dashboard {
+        background-color: transparent !important;
+        border: none !important;
+      }
+      .uppy-Dashboard-inner {
+        background-color: #1f2937 !important; /* bg-gray-800 */
+        border: 2px dashed #4b5563 !important; /* border-gray-600 */
+      }
+      .uppy-Dashboard-note {
+          color: #9ca3af !important; /* text-gray-400 */
+      }
+      .uppy-Dashboard-browse {
+          color: #e5e7eb !important; /* text-gray-200 */
+      }
+      .uppy-Dashboard-poweredBy {
+        display: none !important;
+      }
+    </style>
+</head>
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>

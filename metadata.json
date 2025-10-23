@@ -1,0 +1,5 @@
+{
+  "name": "Image Metadata Explorer with AI Analysis",
+  "description": "An application to upload images, extract their embedded metadata (EXIF, GPS, etc.), and use Gemini to generate an AI-powered analysis of the photo's context based on its data.",
+  "requestFramePermissions": []
+}

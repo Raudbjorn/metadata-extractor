@@ -1,0 +1,89 @@
+{
+  "tags": [
+    {
+      "key": "ObjectName",
+      "label": "Title",
+      "category": "description"
+    },
+    {
+      "key": "ImageDescription",
+      "label": "Caption",
+      "category": "description"
+    },
+    {
+      "key": "Keywords",
+      "label": "Keywords",
+      "category": "keywords"
+    },
+    {
+      "key": "Artist",
+      "label": "Photographer/Creator",
+      "category": "author"
+    },
+    {
+      "key": "Make",
+      "label": "Camera Make",
+      "category": "device"
+    },
+    {
+      "key": "Model",
+      "label": "Camera Model",
+      "category": "device"
+    },
+    {
+      "key": "LensModel",
+      "label": "Lens Model",
+      "category": "device"
+    },
+    {
+      "key": "Orientation",
+      "label": "Orientation",
+      "category": "device"
+    },
+    {
+      "key": "DateTimeOriginal",
+      "label": "Date/Time Taken",
+      "category": "time"
+    },
+    {
+      "key": "latitude",
+      "label": "Latitude",
+      "category": "gps"
+    },
+    {
+      "key": "longitude",
+      "label": "Longitude",
+      "category": "gps"
+    },
+    {
+      "key": "FNumber",
+      "label": "Aperture (F-stop)",
+      "category": "camera_settings"
+    },
+    {
+      "key": "ExposureTime",
+      "label": "Exposure Time",
+      "category": "camera_settings"
+    },
+    {
+      "key": "ISO",
+      "label": "ISO Speed",
+      "category": "camera_settings"
+    },
+    {
+      "key": "FocalLength",
+      "label": "Focal Length",
+      "category": "camera_settings"
+    },
+    {
+      "key": "ImageWidth",
+      "label": "Image Width",
+      "category": "device"
+    },
+    {
+      "key": "ImageHeight",
+      "label": "Image Height",
+      "category": "device"
+    }
+  ]
+}

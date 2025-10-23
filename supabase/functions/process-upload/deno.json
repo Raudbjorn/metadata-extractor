@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "exifr": "https://esm.sh/exifr@7.1.3"
+  }
+}
