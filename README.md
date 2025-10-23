@@ -74,6 +74,34 @@ The app will be available at [http://localhost:3000](http://localhost:3000)
 5. Metadata is sent to Google Gemini for creative story generation
 6. Results are displayed in an interactive interface
 
+### Application Flow Diagram
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant UppyUploader
+    participant EdgeFunction as Process-Upload<br/>(Edge Function)
+    participant MediaService
+    participant GeminiService
+    participant Display as MetadataDisplay
+
+    User->>UppyUploader: Upload Image
+    UppyUploader->>EdgeFunction: POST multipart/form-data
+    EdgeFunction->>EdgeFunction: Extract EXIF with exifr
+    EdgeFunction-->>UppyUploader: Return metadata JSON
+
+    UppyUploader->>MediaService: generatePerceptualHash(imageUrl)
+    MediaService->>MediaService: Generate blockhash
+    MediaService-->>UppyUploader: Return pHash
+
+    UppyUploader->>GeminiService: analyzeMetadataWithGemini()
+    GeminiService->>GeminiService: Call Gemini API
+    GeminiService-->>UppyUploader: Return AI story
+
+    UppyUploader->>Display: Display results
+    Display->>User: Show metadata & story
+```
+
 ## Database Schema
 
 The app includes migrations for a `media_metadata` table that can store:
@@ -89,10 +117,88 @@ npm run build
 ```
 Output will be in the `dist/` directory.
 
+## Architecture & Services
+
+This project features comprehensive service documentation with JSDoc comments for IntelliSense support. All exported functions are extensively documented with parameters, return types, examples, and usage patterns.
+
+### Core Services
+
+#### 🤖 Gemini Service (`services/geminiService.ts`)
+Integrates with Google's Gemini AI to generate creative narrative stories from image metadata.
+
+**Key Function:**
+```typescript
+analyzeMetadataWithGemini(
+  embeddedMetadata: Record<string, any>,
+  providerMetadata: Record<string, any> | undefined,
+  config: AppConfig | null,
+  imageFormat: string
+): Promise<string>
+```
+
+#### 🖼️ Media Service (`services/mediaService.ts`)
+Client-side perceptual hash generation for image fingerprinting and duplicate detection.
+
+**Key Function:**
+```typescript
+generatePerceptualHash(imageUrl: string): Promise<string>
+```
+Generates a 64-bit perceptual hash using the blockhash algorithm (16-bit precision).
+
+#### ⚙️ Config Service (`services/configService.ts`)
+Loads and caches EXIF tag configuration with singleton pattern.
+
+**Key Function:**
+```typescript
+getConfig(): Promise<AppConfig>
+```
+Fetches configuration once and caches for subsequent calls.
+
+#### 🔧 Edge Functions (`supabase/functions/`)
+- **process-upload**: Receives multipart uploads from Uppy, extracts EXIF metadata
+- **extract-metadata**: Alternative endpoint for raw binary uploads
+
+### Component Architecture
+
+```mermaid
+graph TB
+    subgraph Frontend["Frontend (React)"]
+        App[App.tsx]
+        Uppy[UppyUploader.tsx]
+        ImageUploader[ImageUploader.tsx<br/>ALTERNATIVE]
+        Display[MetadataDisplay.tsx]
+    end
+
+    subgraph Services["Services Layer"]
+        Config[configService.ts]
+        Media[mediaService.ts]
+        Gemini[geminiService.ts]
+    end
+
+    subgraph Backend["Edge Functions"]
+        ProcessUpload[process-upload]
+    end
+
+    subgraph External["External APIs"]
+        GeminiAPI[Google Gemini API]
+    end
+
+    App --> Uppy
+    App -.alternative.-> ImageUploader
+    Uppy --> ProcessUpload
+    Uppy --> Media
+    Uppy --> Gemini
+    Gemini --> GeminiAPI
+
+    ImageUploader -.-> ProcessUpload
+```
+
+For comprehensive flowcharts, detailed service documentation, and data flow diagrams, see **[ARCHITECTURE.md](ARCHITECTURE.md)**.
+
 ## Technologies
 
 - **Frontend**: React 19, TypeScript, Vite
-- **File Upload**: Uppy
+- **File Upload**: Uppy (with native HTML5 alternative in ImageUploader)
 - **AI**: Google Gemini 2.5 Flash
 - **Backend**: Supabase Edge Functions (Deno)
 - **Database**: PostgreSQL (via Supabase)
