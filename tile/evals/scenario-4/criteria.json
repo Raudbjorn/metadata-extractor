@@ -1,0 +1,37 @@
+{
+  "context": "Evaluates correct implementation of client-side perceptual hash generation using blockhash-js and the HTML5 Canvas API. Tests the complete pipeline from image loading through pixel extraction to blockhash invocation, including correct arguments (bits=16, method=1) and error handling that returns an empty string.",
+  "type": "weighted_checklist",
+  "capability_tested": "Client-side Perceptual Hash Generation",
+  "checklist": [
+    {
+      "name": "crossOrigin Anonymous",
+      "description": "The Image element has its crossOrigin property set to 'Anonymous' before setting the src.",
+      "max_score": 10
+    },
+    {
+      "name": "Canvas sized to image",
+      "description": "The offscreen canvas width and height are set to image.width and image.height respectively.",
+      "max_score": 15
+    },
+    {
+      "name": "getImageData full area",
+      "description": "context.getImageData(0, 0, image.width, image.height) is called to extract all pixel data.",
+      "max_score": 15
+    },
+    {
+      "name": "blockhash(imageData, 16, 1)",
+      "description": "blockhash is called with exactly three arguments: the ImageData object, 16 (bits), and 1 (method).",
+      "max_score": 30
+    },
+    {
+      "name": "Returns hash string",
+      "description": "The function returns the string result from blockhash as the perceptual hash.",
+      "max_score": 15
+    },
+    {
+      "name": "Empty string on error",
+      "description": "Errors are caught in a try/catch, logged with console.error, and an empty string is returned instead of throwing.",
+      "max_score": 15
+    }
+  ]
+}

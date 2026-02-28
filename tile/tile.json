@@ -1,0 +1,7 @@
+{
+  "name": "cognitive-construct/image-metadata-explorer-with-ai-analysis",
+  "version": "0.0.0",
+  "docs": "docs/index.md",
+  "summary": "A React 19 + TypeScript single-page web application that extracts EXIF metadata from uploaded images and uses Google Gemini AI to generate creative narrative stories based on the hidden data within photos.",
+  "private": true
+}

@@ -1,0 +1,37 @@
+{
+  "context": "Evaluates correct use of Uppy's event system for handling upload lifecycle events. Tests whether upload-success correctly extracts file and response.body, and whether upload-error uses uppy.info() with the right arguments including fallback error message logic.",
+  "type": "weighted_checklist",
+  "capability_tested": "Uppy Upload Event Handling",
+  "checklist": [
+    {
+      "name": "upload-success event registered",
+      "description": "uppyInstance.on('upload-success', handler) is used to register the success handler.",
+      "max_score": 15
+    },
+    {
+      "name": "Success callback with file + body",
+      "description": "The success handler calls onUploadSuccess({ file, metadata: response.body }) with both file and the response body as the metadata.",
+      "max_score": 25
+    },
+    {
+      "name": "Guard on file and response.body",
+      "description": "The success handler checks that both file and response.body are truthy before calling the callback.",
+      "max_score": 10
+    },
+    {
+      "name": "upload-error event registered",
+      "description": "uppyInstance.on('upload-error', handler) is used to register the error handler.",
+      "max_score": 15
+    },
+    {
+      "name": "Error message fallback logic",
+      "description": "The error message is extracted as response?.body?.error || error.message, preferring the response body's error field.",
+      "max_score": 20
+    },
+    {
+      "name": "uppy.info() call signature",
+      "description": "uppy.info() is called with three arguments: the error message string, 'error', and 5000 (ms).",
+      "max_score": 15
+    }
+  ]
+}
