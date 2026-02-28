@@ -1,0 +1,1 @@
+Uppy Component Lifecycle with React Hooks

@@ -1,0 +1,37 @@
+{
+  "context": "Evaluates correct implementation of config-driven metadata rendering with category grouping. Tests that tags are grouped by config.tags[].category, only matching tags are shown, tag.label is used for display (not tag.key), array values are joined, and appropriate fallback messages appear when config or matches are absent.",
+  "type": "weighted_checklist",
+  "capability_tested": "Config-driven Metadata Display with Categorization",
+  "checklist": [
+    {
+      "name": "Tags grouped by category",
+      "description": "The rendering logic groups config.tags by their category property, creating one group per unique category value.",
+      "max_score": 20
+    },
+    {
+      "name": "Filter to matching keys",
+      "description": "Only tags where embedded[tag.key] is truthy (exists in embedded metadata) are included in the grouped output.",
+      "max_score": 20
+    },
+    {
+      "name": "Label used for display",
+      "description": "Each metadata row displays tag.label from the config as the field name, not the raw tag.key.",
+      "max_score": 15
+    },
+    {
+      "name": "Array values joined",
+      "description": "Values that are arrays are converted to a display string by joining with ', '.",
+      "max_score": 15
+    },
+    {
+      "name": "No config fallback",
+      "description": "When config?.tags is falsy, a fallback message indicating configuration unavailability is shown.",
+      "max_score": 15
+    },
+    {
+      "name": "No matching tags fallback",
+      "description": "When no tags match the embedded metadata (categorizedTags is empty), a fallback message indicating no metadata was found is shown.",
+      "max_score": 15
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "context": "Evaluates correct use of React hooks for managing the Uppy instance lifecycle. Tests that useMemo is used to create the stable Uppy instance, useEffect is used to attach the Dashboard plugin to a DOM ref, and uppy.close() is called in the cleanup function.",
+  "type": "weighted_checklist",
+  "capability_tested": "Uppy Component Lifecycle with React Hooks",
+  "checklist": [
+    {
+      "name": "useMemo for Uppy instance",
+      "description": "The Uppy instance is created inside a useMemo hook, not directly in the component body or a useEffect.",
+      "max_score": 25
+    },
+    {
+      "name": "XHRUpload in useMemo",
+      "description": "uppyInstance.use(XHRUpload, {...}) is called inside the same useMemo block where Uppy is instantiated.",
+      "max_score": 15
+    },
+    {
+      "name": "useRef for container",
+      "description": "A React ref (useRef) is used to hold a reference to the Dashboard's container DOM element.",
+      "max_score": 15
+    },
+    {
+      "name": "Dashboard in useEffect",
+      "description": "uppy.use(Dashboard, { target: ref.current, ... }) is called inside a useEffect hook, not in useMemo or the render body.",
+      "max_score": 20
+    },
+    {
+      "name": "uppy.close() cleanup",
+      "description": "The useEffect returns a cleanup function that calls uppy.close() to destroy the Uppy instance on unmount.",
+      "max_score": 25
+    }
+  ]
+}

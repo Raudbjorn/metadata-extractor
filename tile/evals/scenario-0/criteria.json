@@ -1,0 +1,42 @@
+{
+  "context": "Evaluates correct configuration of Uppy for single-file image upload with restrictions. Focuses on whether the correct Uppy constructor options (autoProceed, restrictions) and plugin configurations (Dashboard inline/dark, XHRUpload fieldName) are applied.",
+  "type": "weighted_checklist",
+  "capability_tested": "Uppy File Upload with Restrictions",
+  "checklist": [
+    {
+      "name": "autoProceed enabled",
+      "description": "The Uppy instance is created with autoProceed: true so uploads start immediately without user action.",
+      "max_score": 15
+    },
+    {
+      "name": "File type restrictions",
+      "description": "restrictions.allowedFileTypes is set to ['image/jpeg', 'image/png', 'image/tiff', 'image/webp'] or equivalent.",
+      "max_score": 20
+    },
+    {
+      "name": "Max file size restriction",
+      "description": "restrictions.maxFileSize is set to 10485760 (10 * 1024 * 1024 bytes) or equivalent 10MB value.",
+      "max_score": 15
+    },
+    {
+      "name": "Single file restriction",
+      "description": "restrictions.maxNumberOfFiles is set to 1.",
+      "max_score": 10
+    },
+    {
+      "name": "Dashboard inline + dark theme",
+      "description": "The Dashboard plugin is added via uppy.use(Dashboard, {...}) with inline: true and theme: 'dark'.",
+      "max_score": 20
+    },
+    {
+      "name": "Dashboard target container",
+      "description": "The Dashboard target is set to the container DOM element (e.g., via a ref), not a string selector.",
+      "max_score": 10
+    },
+    {
+      "name": "XHRUpload fieldName",
+      "description": "XHRUpload is configured with fieldName: 'files[]' matching the server's expected field name.",
+      "max_score": 10
+    }
+  ]
+}

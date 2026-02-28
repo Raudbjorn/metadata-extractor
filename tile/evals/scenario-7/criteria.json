@@ -1,0 +1,37 @@
+{
+  "context": "Evaluates correct implementation of the getConfig() singleton configuration service. Tests that the config is fetched only once via lazy loading, subsequent calls return the same cached promise, non-OK HTTP responses throw errors, and the cache is cleared on error to permit retries.",
+  "type": "weighted_checklist",
+  "capability_tested": "Singleton Configuration Service",
+  "checklist": [
+    {
+      "name": "Module-level cache variable",
+      "description": "A module-level variable (e.g., configPromise) is used to cache the promise, initialized to null.",
+      "max_score": 10
+    },
+    {
+      "name": "Fetch on first call only",
+      "description": "fetch('/exiftool_config.json') is called only when the cache variable is null/falsy, not on every invocation.",
+      "max_score": 25
+    },
+    {
+      "name": "Response JSON parsed",
+      "description": "The fetch response is checked for response.ok, then response.json() is called to parse the configuration.",
+      "max_score": 15
+    },
+    {
+      "name": "Same promise returned",
+      "description": "Subsequent calls to getConfig() return the exact same promise object that was created on the first call.",
+      "max_score": 20
+    },
+    {
+      "name": "Cache cleared on error",
+      "description": "In the catch handler, the cache variable is set back to null to allow the next call to trigger a fresh fetch.",
+      "max_score": 20
+    },
+    {
+      "name": "Error re-thrown",
+      "description": "After clearing the cache, the error is re-thrown so callers can handle it appropriately.",
+      "max_score": 10
+    }
+  ]
+}

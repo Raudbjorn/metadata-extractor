@@ -1,0 +1,37 @@
+{
+  "context": "Evaluates correct implementation of the Supabase Edge Function for processing multipart image uploads. Tests whether formData.get('files[]') is used, the file is converted to ArrayBuffer, exifr.parse(buffer, true) is called with full options, and CORS headers are included in all responses.",
+  "type": "weighted_checklist",
+  "capability_tested": "Server-side EXIF Extraction via Multipart Upload",
+  "checklist": [
+    {
+      "name": "formData.get('files[]')",
+      "description": "The function calls req.formData() and then formData.get('files[]') using the exact field name Uppy sends.",
+      "max_score": 20
+    },
+    {
+      "name": "String/missing file guard",
+      "description": "The function checks that the extracted file is not null and not a plain string before proceeding, throwing an error otherwise.",
+      "max_score": 15
+    },
+    {
+      "name": "ArrayBuffer conversion",
+      "description": "file.arrayBuffer() is called to convert the uploaded file to a buffer before passing it to the parser.",
+      "max_score": 15
+    },
+    {
+      "name": "exifr.parse with true",
+      "description": "exifr.parse(buffer, true) is called with the second argument set to true to enable all parsing options.",
+      "max_score": 20
+    },
+    {
+      "name": "Raw metadata as response body",
+      "description": "The parsed metadata object is returned directly as the JSON response body (not wrapped in an additional property).",
+      "max_score": 15
+    },
+    {
+      "name": "CORS headers in all responses",
+      "description": "corsHeaders are spread into the headers of all Response objects, including error responses and the OPTIONS preflight response.",
+      "max_score": 15
+    }
+  ]
+}

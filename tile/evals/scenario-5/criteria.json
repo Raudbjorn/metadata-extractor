@@ -1,0 +1,37 @@
+{
+  "context": "Evaluates correct integration with the Google Gemini API for AI story generation from image metadata. Tests GoogleGenAI initialization, model selection (gemini-2.5-flash), generation config (temperature/topP), config validation before API call, correct return of response.text, and user-friendly error wrapping.",
+  "type": "weighted_checklist",
+  "capability_tested": "AI Metadata Analysis with Google Gemini",
+  "checklist": [
+    {
+      "name": "GoogleGenAI initialization",
+      "description": "new GoogleGenAI({ apiKey: process.env.API_KEY }) is called at module level to create the client.",
+      "max_score": 15
+    },
+    {
+      "name": "Null config guard",
+      "description": "The function checks if config is null/falsy and throws an error before making the API call.",
+      "max_score": 15
+    },
+    {
+      "name": "Model name gemini-2.5-flash",
+      "description": "ai.models.generateContent() is called with model: 'gemini-2.5-flash'.",
+      "max_score": 20
+    },
+    {
+      "name": "Generation config temperature+topP",
+      "description": "The config object passed to generateContent includes temperature: 0.8 and topP: 0.95.",
+      "max_score": 20
+    },
+    {
+      "name": "Returns response.text",
+      "description": "The function returns response.text (not response.text() or other variants) from the generateContent call.",
+      "max_score": 15
+    },
+    {
+      "name": "User-friendly error wrapping",
+      "description": "Errors are caught, logged with console.error, and re-thrown as new Error('The AI service is currently unavailable.') or similar user-friendly message.",
+      "max_score": 15
+    }
+  ]
+}

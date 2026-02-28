@@ -1,0 +1,37 @@
+{
+  "context": "Evaluates correct React pattern for loading application configuration once on mount. Tests that useEffect with empty dependency array is used, the resolved config is stored in state, errors are caught and set in error state with console.error, and the config is passed to child components and service functions.",
+  "type": "weighted_checklist",
+  "capability_tested": "Application Config Loading on Mount",
+  "checklist": [
+    {
+      "name": "useEffect with empty deps",
+      "description": "getConfig() is called inside a useEffect hook that has an empty array [] as its dependency argument.",
+      "max_score": 25
+    },
+    {
+      "name": "Config stored in state",
+      "description": "The resolved config value is passed to a state setter (e.g., setAppConfig) in the .then() or await resolution.",
+      "max_score": 20
+    },
+    {
+      "name": "Error state on failure",
+      "description": "In the .catch() or catch block, setError() (or equivalent) is called with a descriptive error message string.",
+      "max_score": 20
+    },
+    {
+      "name": "console.error on failure",
+      "description": "The error is logged using console.error before or alongside setting the error state.",
+      "max_score": 15
+    },
+    {
+      "name": "Config passed to display component",
+      "description": "The appConfig state variable is passed as a prop to the metadata display or child component.",
+      "max_score": 10
+    },
+    {
+      "name": "Config passed to AI function",
+      "description": "The appConfig state is passed as an argument to the AI analysis function call (e.g., analyzeMetadataWithGemini).",
+      "max_score": 10
+    }
+  ]
+}

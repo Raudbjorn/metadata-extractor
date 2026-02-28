@@ -1,0 +1,37 @@
+{
+  "context": "Evaluates correct implementation of the formatMetadataForPrompt function that combines image format, cloud provider metadata, and config-driven EXIF tags into a structured string for AI prompts. Tests field selection logic, label usage from config, array joining, and fallback messages.",
+  "type": "weighted_checklist",
+  "capability_tested": "Metadata Prompt Formatting",
+  "checklist": [
+    {
+      "name": "Image format uppercased header",
+      "description": "Output begins with 'Image Format: {FORMAT}' where FORMAT is the imageFormat argument converted to uppercase.",
+      "max_score": 10
+    },
+    {
+      "name": "Provider section conditional",
+      "description": "The provider metadata section is only included when the provider argument is truthy (not null/undefined).",
+      "max_score": 15
+    },
+    {
+      "name": "Correct provider field mapping",
+      "description": "Provider fields are mapped using the specific keys: name→'Original Filename', host→'Source Service', description→'Description', id→'Source ID'. No other provider keys are included.",
+      "max_score": 20
+    },
+    {
+      "name": "Embedded tags use config",
+      "description": "The function iterates config.tags and checks embedded[tag.key] for each tag, using tag.label as the display label.",
+      "max_score": 25
+    },
+    {
+      "name": "Array values joined",
+      "description": "When an embedded metadata value is an Array, it is converted to a string by joining elements with ', '.",
+      "max_score": 15
+    },
+    {
+      "name": "No metadata fallback message",
+      "description": "When no config tags match embedded metadata, the string 'No relevant embedded metadata was found in this image.' is appended.",
+      "max_score": 15
+    }
+  ]
+}
